@@ -1,0 +1,8 @@
+main{
+    min-height: 100vh;
+    margin-top: 2rem;
+}
+#container{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
