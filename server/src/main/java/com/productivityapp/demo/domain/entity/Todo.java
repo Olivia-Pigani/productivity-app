@@ -7,15 +7,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Todo {
 
     @Id
@@ -30,10 +33,12 @@ public class Todo {
     private String description;
 
     @NotNull
-    private LocalDate publishDate;
+    @Pattern(regexp = "\\d{2}\\d{2}\\d{4}",message = "the date must be like : dd/mm/yyyy")
+    private String publishDate;
 
     @NotNull(message = "dead line date must be filled this way : dd/mm/yyyy")
-    private LocalDate deadLineDate;
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}",message = "the date must be like : dd/mm/yyyy")
+    private String deadLineDate;
 
     @NotNull(message = "there must be a priority")
     private Priority priority;
