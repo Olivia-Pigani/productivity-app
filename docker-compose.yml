@@ -1,0 +1,33 @@
+version : '3.8'
+
+services:
+  postgresql:
+    container_name: postgres_service
+    image: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_service
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL} 
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      -  pgadmin:/var/lib/postgresql
+    ports:
+      - 5050:${PGADMIN_PORT}
+    restart: unless-stopped
+      
+volumes: 
+  postgres:
+  pgadmin:
+    
