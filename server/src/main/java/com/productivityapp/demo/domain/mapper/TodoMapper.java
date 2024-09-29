@@ -11,25 +11,32 @@ import java.util.stream.Collectors;
 public class TodoMapper {
 
     public Todo toTodo(TodoDto todoDto) {
-
-        return Todo.builder()
-                .title(todoDto.title())
-                .description(todoDto.description())
-                .publishDate(todoDto.publishDate())
-                .deadLineDate(todoDto.deadLineDate())
-                .priority(todoDto.priority())
-                .isDone(todoDto.isDone())
-                .build();
+        if (todoDto != null){
+            return Todo.builder()
+                    .title(todoDto.title())
+                    .description(todoDto.description())
+                    .publishDate(todoDto.publishDate())
+                    .deadLineDate(todoDto.deadLineDate())
+                    .priority(todoDto.priority())
+                    .isDone(todoDto.isDone())
+                    .build();
+        }else {
+            throw new NullPointerException("the todoDto must not be null");
+        }
     }
 
     public TodoDto toTodoDto(Todo todo) {
-        return new TodoDto(
-                todo.getTitle()
-                , todo.getDescription()
-                , todo.getPublishDate()
-                , todo.getDeadLineDate()
-                , todo.getPriority()
-                , todo.isDone());
+        if (todo != null){
+            return new TodoDto(
+                    todo.getTitle()
+                    , todo.getDescription()
+                    , todo.getPublishDate()
+                    , todo.getDeadLineDate()
+                    , todo.getPriority()
+                    , todo.isDone());
+        }else {
+            throw new NullPointerException("the todo must not be null");
+        }
     }
 
     public List<Todo> toTodoList(List<TodoDto> todoList) {
@@ -44,10 +51,15 @@ public class TodoMapper {
     }
 
     public List<TodoDto> toTodoDtoList(List<Todo> todoList) {
-        return todoList
-                .stream()
-                .map(this::toTodoDto)
-                .collect(Collectors.toList());
+        if (!todoList.isEmpty()){
+            return todoList
+                    .stream()
+                    .map(this::toTodoDto)
+                    .toList();
+        }else {
+            throw new NullPointerException("the todoList list is empty !");
+        }
+
     }
 
 

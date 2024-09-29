@@ -91,4 +91,46 @@ class TodoMapperTest {
         assertEquals(errorMessage.getMessage(),"the todo list is empty !");
     }
 
+    @Test
+    public void should_method_toTodo_throw_nullPointerException_if_todoDto_is_null(){
+        //GIVEN
+        TodoDto todoDto = null;
+
+        //THEN
+        NullPointerException errorMessage = assertThrows(NullPointerException.class, ()-> todoMapper.toTodo(todoDto));
+        assertEquals(errorMessage.getMessage(),"the todoDto must not be null");
+    }
+
+    @Test
+    public void should_method_toTodoDto_throw_nullPointerException_if_todo_is_null(){
+        //GIVEN
+        Todo todo = null;
+
+        //THEN
+        NullPointerException errorMessage = assertThrows(NullPointerException.class, ()-> todoMapper.toTodoDto(todo));
+        assertEquals(errorMessage.getMessage(),"the todo must not be null");
+    }
+
+    @Test
+    public void should_method_toTodoDtoList_throw_nullPointerException_if_todoList_is_null() {
+        //GIVEN
+        List<Todo> todos = new ArrayList<>();
+
+        //THEN
+        NullPointerException errorMessage = assertThrows(NullPointerException.class, () -> todoMapper.toTodoDtoList(todos));
+        assertEquals(errorMessage.getMessage(), "the todoList list is empty !");
+    }
+
+    @Test
+    public void should_TodoDtoList_be_immutable(){
+        //GIVEN
+        List<Todo> todos = todoListForTest;
+
+        //WHEN
+        List<TodoDto> todoDtos = todoMapper.toTodoDtoList(todos);
+
+        //THEN
+        assertThrows(UnsupportedOperationException.class,() -> todoDtos.add(2,new TodoDto("title8","description8","22/05/1995","15/02/2023",Priority.HIGH,true)));
+    }
+
 }
