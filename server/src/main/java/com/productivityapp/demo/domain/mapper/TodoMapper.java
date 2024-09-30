@@ -1,6 +1,7 @@
 package com.productivityapp.demo.domain.mapper;
 
 import com.productivityapp.demo.domain.dto.TodoDto;
+import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,20 @@ public class TodoMapper {
         }
     }
 
+    public TodoResponseDto toTodoResponseDto(Todo todo) {
+        if (todo != null){
+            return new TodoResponseDto(
+                    todo.getTitle()
+                    , todo.getDescription()
+                    , todo.getPublishDate()
+                    , todo.getDeadLineDate()
+                    , todo.getPriority()
+                    , todo.isDone());
+        }else {
+            throw new NullPointerException("the todo must not be null");
+        }
+    }
+
     public List<Todo> toTodoList(List<TodoDto> todoList) {
         if (!todoList.isEmpty()){
             return todoList
@@ -59,8 +74,16 @@ public class TodoMapper {
         }else {
             throw new NullPointerException("the todoList list is empty !");
         }
-
     }
 
-
+    public List<TodoResponseDto> toTodoResponseDtoList(List<Todo> todoList) {
+        if (!todoList.isEmpty()){
+            return todoList
+                    .stream()
+                    .map(this::toTodoResponseDto)
+                    .toList();
+        }else{
+            throw new NullPointerException("the todoList list is empty !");
+        }
+    }
 }

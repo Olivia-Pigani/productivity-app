@@ -1,6 +1,7 @@
 package com.productivityapp.demo.domain.mapper;
 
 import com.productivityapp.demo.domain.dto.TodoDto;
+import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
 import com.productivityapp.demo.domain.enumeration.Priority;
 import org.junit.jupiter.api.BeforeEach;
@@ -132,5 +133,68 @@ class TodoMapperTest {
         //THEN
         assertThrows(UnsupportedOperationException.class,() -> todoDtos.add(2,new TodoDto("title8","description8","22/05/1995","15/02/2023",Priority.HIGH,true)));
     }
+
+    @Test
+    public void should_map_todo_to_todoResponseDto() {
+        //GIVEN
+        Todo todo = todoListForTest.getFirst();
+
+        //WHEN
+        TodoResponseDto todoResponseDto = todoMapper.toTodoResponseDto(todo);
+
+
+        //THEN
+        assertEquals(todoResponseDto.title(), todo.getTitle());
+        assertEquals(todoResponseDto.description(), todo.getDescription());
+        assertEquals(todoResponseDto.publishDate(), todo.getPublishDate());
+        assertEquals(todoResponseDto.deadLineDate(), todo.getDeadLineDate());
+        assertEquals(todoResponseDto.priority(), todo.getPriority());
+        assertEquals(todoResponseDto.isDone(), todo.isDone());
+
+    }
+    @Test
+    public void should_method_toTodoResponseDto_throw_nullPointerException_if_todo_is_null(){
+        //GIVEN
+        Todo todo = null;
+
+        //THEN
+        NullPointerException errorMessage = assertThrows(NullPointerException.class, ()-> todoMapper.toTodoResponseDto(todo));
+        assertEquals(errorMessage.getMessage(),"the todo must not be null");
+    }
+
+
+
+    @Test
+    public void should_map_todoList_to_todoResponseDtoList() {
+        //WHEN
+        List<TodoResponseDto> todoResponseDtoList = todoMapper.toTodoResponseDtoList(todoListForTest);
+
+        //THEN
+        assertEquals(todoResponseDtoList.size(), todoDtoListForTest.size());
+        assertEquals(todoResponseDtoList.getFirst().title(), todoListForTest.getFirst().getTitle());
+    }
+
+    @Test
+    public void should_method_toTodoResponseDtoList_throw_NullPointerException_if_todoList_is_null() {
+        //GIVEN
+        List<Todo> todos = new ArrayList<>();
+
+        //THEN
+        NullPointerException errorMessage = assertThrows(NullPointerException.class, () -> todoMapper.toTodoResponseDtoList(todos));
+        assertEquals(errorMessage.getMessage(), "the todoList list is empty !");
+    }
+    @Test
+    public void should_TodoResponseDtoList_be_immutable(){
+        //GIVEN
+        List<Todo> todos = todoListForTest;
+
+        //WHEN
+        List<TodoResponseDto> todoResponseDtoList = todoMapper.toTodoResponseDtoList(todos);
+
+        //THEN
+        assertThrows(UnsupportedOperationException.class,() -> todoResponseDtoList.add(2,new TodoResponseDto("title8","description8","22/05/1995","15/02/2023",Priority.HIGH,true)));
+    }
+
+
 
 }
