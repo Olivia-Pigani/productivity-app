@@ -5,9 +5,11 @@ import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
 import com.productivityapp.demo.domain.mapper.TodoMapper;
 import com.productivityapp.demo.repository.TodoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -30,6 +32,18 @@ public class TodoService {
     public List<TodoResponseDto> getAllTodos() {
 
         return todoMapper.toTodoResponseDtoList(todoRepository.findAll());
+
+    }
+
+    public TodoResponseDto getTodoById(Long todoId){
+
+        Optional<Todo> todo = todoRepository.findById(todoId);
+
+        if(todo.isPresent()){
+            return todoMapper.toTodoResponseDto(todo.get());
+        }
+
+        throw new EntityNotFoundException("there is no todo with this id");
 
     }
 }

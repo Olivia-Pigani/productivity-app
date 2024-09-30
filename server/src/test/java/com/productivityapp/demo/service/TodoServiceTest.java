@@ -6,6 +6,7 @@ import com.productivityapp.demo.domain.entity.Todo;
 import com.productivityapp.demo.domain.enumeration.Priority;
 import com.productivityapp.demo.domain.mapper.TodoMapper;
 import com.productivityapp.demo.repository.TodoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,10 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class TodoServiceTest {
@@ -105,7 +108,7 @@ class TodoServiceTest {
     }
 
     @Test
-    public void should_return_all_todos(){
+    public void should_return_all_todoResponseDto(){
         //GIVEN
         List<TodoResponseDto> todoResponseDtoList = Arrays.asList(
                 new TodoResponseDto("title1","description1","20/12/2023","15/02/2026",Priority.MEDIUM,true),
@@ -126,5 +129,41 @@ class TodoServiceTest {
         assertEquals(todoResponseDtoList.size(),todos.size());
         verify(todoMapper,Mockito.times(1)).toTodoResponseDtoList(todos);
         verify(todoRepository,Mockito.times(1)).findAll();
+    }
+
+    @Test
+    public void should_return_one_todoResponseDto_by_its_id(){
+        //GIVEN
+        Long todoId = 0L;
+        Todo todoToSearch = new Todo(0L,"title1","description1","20/12/2023","15/02/2026",Priority.MEDIUM,true);
+        TodoResponseDto todoResponseDtoToSearch = new TodoResponseDto("title1","description1","20/12/2023","15/02/2026",Priority.MEDIUM,true);
+
+        //MOCK CALLS
+        when(todoRepository.findById(todoId)).thenReturn(Optional.of(todoToSearch));
+        when(todoMapper.toTodoResponseDto(todoToSearch)).thenReturn(todoResponseDtoToSearch);
+
+        //WHEN
+        TodoResponseDto responseDto = todoService.getTodoById(todoId);
+
+        //THEN
+        assertEquals(responseDto.title(),todoToSearch.getTitle());
+        assertEquals(responseDto.title(),todoResponseDtoToSearch.title());
+        assertEquals(todoId,todoToSearch.getId());
+
+        verify(todoRepository,Mockito.times(1)).findById(todoId);
+        verify(todoMapper,Mockito.times(1)).toTodoResponseDto(todoToSearch);
+    }
+
+    @Test
+    public void should_throw_EntityNotFoundException_when_todo_cannot_be_found_by_id(){
+        //GIVEN
+        Long todoId = 15L;
+
+        //WHEN
+        when(todoRepository.findById(15L)).thenReturn(Optional.empty());
+
+        //THEN
+        EntityNotFoundException message = assertThrows(EntityNotFoundException.class,()-> todoService.getTodoById(todoId));
+        assertEquals(message.getMessage(),"there is no todo with this id");
     }
 }
