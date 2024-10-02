@@ -35,15 +35,50 @@ public class TodoService {
 
     }
 
-    public TodoResponseDto getTodoById(Long todoId){
+    public TodoResponseDto getTodoById(Long todoId) {
 
         Optional<Todo> todo = todoRepository.findById(todoId);
 
-        if(todo.isPresent()){
+        if (todo.isPresent()) {
             return todoMapper.toTodoResponseDto(todo.get());
         }
 
         throw new EntityNotFoundException("there is no todo with this id");
 
     }
+
+    public TodoResponseDto updateTodo(Long todoId, TodoDto newTodoDtoData) {
+
+        Optional<Todo> todoOpt = todoRepository.findById(todoId);
+
+        if (todoOpt.isPresent()) {
+
+            Todo todo = todoOpt.get();
+
+            todo.setTitle(newTodoDtoData.title());
+            todo.setDescription(newTodoDtoData.description());
+            todo.setPublishDate(newTodoDtoData.publishDate());
+            todo.setDeadLineDate(newTodoDtoData.deadLineDate());
+            todo.setPriority(newTodoDtoData.priority());
+            todo.setDone(newTodoDtoData.isDone());
+
+            return todoMapper.toTodoResponseDto(todoRepository.save(todo));
+        }
+
+        throw new EntityNotFoundException("there is no todo with this id");
+
+    }
+
+    public boolean deleteTodoById(Long todoId) {
+
+        Optional<Todo> todo = todoRepository.findById(todoId);
+
+        if (todo.isPresent()) {
+            todoRepository.delete(todo.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
