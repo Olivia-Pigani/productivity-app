@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -169,7 +168,7 @@ class TodoServiceTest {
     }
 
     @Test
-    public void should_update_todo_when_we_search_by_todo_id_and_add_new_data(){
+    public void should_update_todo_when_we_search_by_todo_id_and_add_new_data() {
         //GIVEN
         Long todoId = 0L;
         Todo todoToSearchToFind = new Todo(0L, "title1", "description1", "20/12/2023", "15/02/2026", Priority.MEDIUM, true);
@@ -182,15 +181,15 @@ class TodoServiceTest {
         when(todoMapper.toTodoResponseDto(any(Todo.class))).thenReturn(expectedResponseDto);
 
         //WHEN
-        TodoResponseDto responseDto = todoService.updateTodo(todoId,newTodoDtoData);
+        TodoResponseDto responseDto = todoService.updateTodo(todoId, newTodoDtoData);
 
         //THEN
-        assertEquals(expectedResponseDto.title(),responseDto.title());
-        assertEquals(expectedResponseDto.description(),responseDto.description());
-        assertEquals(expectedResponseDto.publishDate(),responseDto.publishDate());
-        assertEquals(expectedResponseDto.deadLineDate(),responseDto.deadLineDate());
-        assertEquals(expectedResponseDto.priority(),responseDto.priority());
-        assertEquals(expectedResponseDto.isDone(),responseDto.isDone());
+        assertEquals(expectedResponseDto.title(), responseDto.title());
+        assertEquals(expectedResponseDto.description(), responseDto.description());
+        assertEquals(expectedResponseDto.publishDate(), responseDto.publishDate());
+        assertEquals(expectedResponseDto.deadLineDate(), responseDto.deadLineDate());
+        assertEquals(expectedResponseDto.priority(), responseDto.priority());
+        assertEquals(expectedResponseDto.isDone(), responseDto.isDone());
 
         verify(todoRepository, Mockito.times(1)).findById(todoId);
         verify(todoRepository, Mockito.times(1)).save(any(Todo.class));
@@ -207,12 +206,12 @@ class TodoServiceTest {
         when(todoRepository.findById(15L)).thenReturn(Optional.empty());
 
         //THEN
-        EntityNotFoundException message = assertThrows(EntityNotFoundException.class, () -> todoService.updateTodo(todoId,newTodoDtoData));
+        EntityNotFoundException message = assertThrows(EntityNotFoundException.class, () -> todoService.updateTodo(todoId, newTodoDtoData));
         assertEquals(message.getMessage(), "there is no todo with this id");
     }
 
     @Test
-    public void should_delete_a_todo_by_its_id(){
+    public void should_delete_a_todo_by_its_id() {
         //GIVEN
         Long todoId = 0L;
         Todo todoToSearchToFind = new Todo(0L, "title1", "description1", "20/12/2023", "15/02/2026", Priority.MEDIUM, true);
@@ -225,8 +224,21 @@ class TodoServiceTest {
         todoService.deleteTodoById(todoId);
 
         //THEN
-        verify(todoRepository,Mockito.times(1)).findById(todoId);
-        verify(todoRepository,Mockito.times(1)).delete(any(Todo.class));
+        verify(todoRepository, Mockito.times(1)).findById(todoId);
+        verify(todoRepository, Mockito.times(1)).delete(any(Todo.class));
+    }
+
+    @Test
+    public void should_throw_EntityNotFoundException_when_todo_cannot_be_found_by_id_method_deleteTodoById() {
+        //GIVEN
+        Long todoId = 10L;
+
+        //WHEN
+        when(todoRepository.findById(15L)).thenReturn(Optional.empty());
+
+        //THEN
+        EntityNotFoundException message = assertThrows(EntityNotFoundException.class, () -> todoService.deleteTodoById(todoId));
+        assertEquals(message.getMessage(), "there is no todo with this id");
     }
 
 }

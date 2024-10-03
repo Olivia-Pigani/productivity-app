@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: productivity_app_server
+  config:
+    import:
+      - file:../.env[.properties]
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${POSTGRES_DB_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    show-sql: true
+
+server:
+  port: 8585

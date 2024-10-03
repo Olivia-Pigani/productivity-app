@@ -11,8 +11,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Entity
@@ -26,18 +24,18 @@ public class Todo {
     private long id;
 
     @NotBlank
-    @Size(min = 1,max = 50,message = "title has to contain 1 to 50 characters")
+    @Size(min = 1, max = 50, message = "title has to contain 1 to 50 characters")
     private String title;
 
-    @Size(max = 500,message = "the description has to contain 500 characters maximum")
+    @Size(max = 500, message = "the description has to contain 500 characters maximum")
     private String description;
 
-    @NotNull
-    @Pattern(regexp = "\\d{2}\\d{2}\\d{4}",message = "the date must be like : dd/mm/yyyy")
+    @NotNull(message = "dead line date must be filled this way : dd/mm/yyyy")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "the date must be like : dd/mm/yyyy")
     private String publishDate;
 
     @NotNull(message = "dead line date must be filled this way : dd/mm/yyyy")
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}",message = "the date must be like : dd/mm/yyyy")
+    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "the date must be like : dd/mm/yyyy")
     private String deadLineDate;
 
     @NotNull(message = "there must be a priority")

@@ -31,7 +31,9 @@ public class TodoService {
 
     public List<TodoResponseDto> getAllTodos() {
 
-        return todoMapper.toTodoResponseDtoList(todoRepository.findAll());
+        Optional<List<Todo>> todoList = Optional.of(todoRepository.findAll());
+
+        return todoMapper.toTodoResponseDtoList(todoList.get());
 
     }
 
@@ -39,11 +41,7 @@ public class TodoService {
 
         Optional<Todo> todo = todoRepository.findById(todoId);
 
-        if (todo.isPresent()) {
-            return todoMapper.toTodoResponseDto(todo.get());
-        }
-
-        throw new EntityNotFoundException("there is no todo with this id");
+        return todoMapper.toTodoResponseDto(todo.get());
 
     }
 
@@ -77,7 +75,7 @@ public class TodoService {
             todoRepository.delete(todo.get());
             return true;
         } else {
-            return false;
+            throw new EntityNotFoundException("there is no todo with this id");
         }
     }
 
