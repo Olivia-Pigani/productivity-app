@@ -2,6 +2,7 @@ package com.productivityapp.demo.controller;
 
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
+import com.productivityapp.demo.domain.enumeration.TimeSpace;
 import com.productivityapp.demo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class TodoController {
     @GetMapping("")
     public ResponseEntity<List<TodoResponseDto>> getAllTodos() {
         return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/timespace/{timeSpace}")
+    public ResponseEntity<List<TodoResponseDto>> getAllTodosByTimeSpace(@PathVariable String timeSpace){
+        return new ResponseEntity<>(todoService.getAllTodosByTimeSpace(TimeSpace.valueOf(timeSpace.toUpperCase())),HttpStatus.OK);
     }
 
     @GetMapping("/{todoId}")

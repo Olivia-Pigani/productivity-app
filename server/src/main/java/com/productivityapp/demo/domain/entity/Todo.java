@@ -11,6 +11,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -31,12 +33,10 @@ public class Todo {
     private String description;
 
     @NotNull(message = "dead line date must be filled this way : dd/mm/yyyy")
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "the date must be like : dd/mm/yyyy")
-    private String publishDate;
+    private LocalDate publishDate;
 
     @NotNull(message = "dead line date must be filled this way : dd/mm/yyyy")
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "the date must be like : dd/mm/yyyy")
-    private String deadLineDate;
+    private LocalDate deadLineDate;
 
     @NotNull(message = "there must be a priority")
     private Priority priority;

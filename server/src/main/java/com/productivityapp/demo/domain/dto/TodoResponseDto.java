@@ -1,6 +1,9 @@
 package com.productivityapp.demo.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.productivityapp.demo.domain.enumeration.Priority;
+
+import java.time.LocalDate;
 
 public record TodoResponseDto(
 
@@ -8,9 +11,11 @@ public record TodoResponseDto(
 
         String description,
 
-        String publishDate,
+        @JsonFormat(pattern = "dd/MM/yyyy")
+        LocalDate publishDate,
 
-        String deadLineDate,
+        @JsonFormat(pattern = "dd/MM/yyyy")
+        LocalDate deadLineDate,
 
         Priority priority,
 

@@ -3,11 +3,13 @@ package com.productivityapp.demo.service;
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
+import com.productivityapp.demo.domain.enumeration.TimeSpace;
 import com.productivityapp.demo.domain.mapper.TodoMapper;
 import com.productivityapp.demo.repository.TodoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,5 +80,27 @@ public class TodoService {
             throw new EntityNotFoundException("there is no todo with this id");
         }
     }
+
+    public List<TodoResponseDto> getAllTodosByTimeSpace(TimeSpace timeSpace){
+
+        Optional<List<Todo>> todoListOpt = Optional.empty();
+
+        switch (timeSpace) {
+
+            case PRESENT -> todoListOpt = Optional.ofNullable(todoRepository.findAllByDeadLineDate(LocalDate.now()));
+
+            case FUTURE -> todoListOpt = Optional.ofNullable(todoRepository.findTodoByDeadLineDateAfter(LocalDate.now()));
+
+            case PAST -> todoListOpt = Optional.ofNullable(todoRepository.findTodoByDeadLineDateBefore(LocalDate.now()));
+
+        }
+
+        if (todoListOpt.isPresent()){
+            return todoMapper.toTodoResponseDtoList(todoListOpt.get());
+        } else {
+            return List.of();
+        }
+    }
+
 
 }

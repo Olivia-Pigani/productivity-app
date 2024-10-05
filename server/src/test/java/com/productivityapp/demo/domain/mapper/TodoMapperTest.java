@@ -7,6 +7,7 @@ import com.productivityapp.demo.domain.enumeration.Priority;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,12 +25,12 @@ class TodoMapperTest {
     void setUp() {
         todoMapper = new TodoMapper();
         TodoDto[] todoDtoArray = {
-                new TodoDto("title1", "description1", "22/06/2024", "02/05/2028", Priority.HIGH, false),
-                new TodoDto("title2", "description2", "22/06/2004", "02/05/2021", Priority.MEDIUM, false)
+                new TodoDto("title1", "description1", LocalDate.parse("22/06/2024"), LocalDate.parse("02/05/2028"), Priority.HIGH, false),
+                new TodoDto("title2", "description2", LocalDate.parse("22/06/2004"), LocalDate.parse("02/05/2021"), Priority.MEDIUM, false)
         };
         Todo[] todoArray = {
-                new Todo(0L, "title3", "description3", "14/05/1996", "03/10/2035", Priority.LOW, true),
-                new Todo(1L, "title4", "description4", "21/05/2015", "02/01/2027", Priority.MEDIUM, false)
+                new Todo(0L, "title3", "description3", LocalDate.parse("14/05/1996"), LocalDate.parse("03/10/2035"), Priority.LOW, true),
+                new Todo(1L, "title4", "description4", LocalDate.parse("21/05/2015"), LocalDate.parse("02/01/2027"), Priority.MEDIUM, false)
         };
         todoDtoListForTest = new ArrayList<>(Arrays.asList(todoDtoArray));
         todoListForTest = new ArrayList<>(Arrays.asList(todoArray));
@@ -131,7 +132,7 @@ class TodoMapperTest {
         List<TodoDto> todoDtos = todoMapper.toTodoDtoList(todos);
 
         //THEN
-        assertThrows(UnsupportedOperationException.class,() -> todoDtos.add(2,new TodoDto("title8","description8","22/05/1995","15/02/2023",Priority.HIGH,true)));
+        assertThrows(UnsupportedOperationException.class,() -> todoDtos.add(2,new TodoDto("title8","description8",LocalDate.parse("22/05/1995"),LocalDate.parse("15/02/2023"),Priority.HIGH,true)));
     }
 
     @Test
@@ -192,7 +193,7 @@ class TodoMapperTest {
         List<TodoResponseDto> todoResponseDtoList = todoMapper.toTodoResponseDtoList(todos);
 
         //THEN
-        assertThrows(UnsupportedOperationException.class,() -> todoResponseDtoList.add(2,new TodoResponseDto("title8","description8","22/05/1995","15/02/2023",Priority.HIGH,true)));
+        assertThrows(UnsupportedOperationException.class,() -> todoResponseDtoList.add(2,new TodoResponseDto("title8","description8",LocalDate.parse("22/05/1995"),LocalDate.parse("15/02/2023"),Priority.HIGH,true)));
     }
 
 
