@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public record TodoResponseDto(
 
+        Long id,
+
         String title,
 
         String description,

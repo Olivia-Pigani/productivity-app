@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/todos")
 public class TodoController {
@@ -32,6 +32,7 @@ public class TodoController {
 
     @GetMapping("/timespace/{timeSpace}")
     public ResponseEntity<List<TodoResponseDto>> getAllTodosByTimeSpace(@PathVariable String timeSpace){
+        System.out.println("method time called");
         return new ResponseEntity<>(todoService.getAllTodosByTimeSpace(TimeSpace.valueOf(timeSpace.toUpperCase())),HttpStatus.OK);
     }
 

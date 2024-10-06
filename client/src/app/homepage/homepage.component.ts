@@ -1,8 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TocomeListComponent } from '../tocome-list/tocome-list.component';
 import { TodayListComponent } from '../today-list/today-list.component';
-import { TodoService } from '../services/todo.service';
 
 
 @Component({
@@ -15,8 +14,6 @@ import { TodoService } from '../services/todo.service';
 export class HomepageComponent{
   
   h1Value : string = '';
-
-  todoService: TodoService = inject(TodoService);
 
   listenToChildComponent(childComponent : TodayListComponent | TocomeListComponent){
     setTimeout(()=>{ // make it happen after first component cycle 

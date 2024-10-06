@@ -27,6 +27,7 @@ public class TodoMapper {
     public TodoDto toTodoDto(Todo todo) {
 
         return new TodoDto(
+                todo.getId(),
                 todo.getTitle()
                 , todo.getDescription()
                 , todo.getPublishDate()
@@ -39,6 +40,7 @@ public class TodoMapper {
     public TodoResponseDto toTodoResponseDto(Todo todo) {
 
         return new TodoResponseDto(
+                todo.getId(),
                 todo.getTitle()
                 , todo.getDescription()
                 , todo.getPublishDate()

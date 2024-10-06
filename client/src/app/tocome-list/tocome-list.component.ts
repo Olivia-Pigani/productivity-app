@@ -19,7 +19,9 @@ export class TocomeListComponent implements OnInit{
   constructor(private todoService: TodoService){}
 
   ngOnInit(): void {
-    this.todoService.tocomeTodoRowList;
+    this.todoService.getAllTocomeTodoRowList();
+    this.tocomeTodos = this.todoService.tocomeTodoRowList();
+    console.log(this.tocomeTodos);
   }
 
 }

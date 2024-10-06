@@ -43,7 +43,7 @@ describe('TodoService', () => {
     });
 
     //THEN
-    const mockReq = testingController.expectOne('http://localhost:8004/api/todos')
+    const mockReq = testingController.expectOne('http://localhost:8585/api/todos')
     expect(mockReq.request.method).toBe('GET');
 
     mockReq.flush(todoFromMockedDb);
@@ -62,7 +62,7 @@ describe('TodoService', () => {
     })
 
     //THEN
-    const mockReq = testingController.expectOne(`http://localhost:8004/api/todos/${TimeSpace.Past}`)
+    const mockReq = testingController.expectOne(`http://localhost:8585/api/todos/${TimeSpace.Past}`)
     expect(mockReq.request.method).toBe('GET');
     expect(mockReq.request.params).toBeDefined;
     mockReq.flush(todoFromMockedDb);

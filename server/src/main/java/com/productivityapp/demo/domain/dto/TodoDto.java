@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public record TodoDto(
 
+        Long id,
+
         String title,
 
         String description,
