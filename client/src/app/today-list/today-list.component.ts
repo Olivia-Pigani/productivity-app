@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, WritableSignal, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, WritableSignal, signal } from '@angular/core';
 import { TodoRowComponent } from "../shared/todo-row/todo-row.component";
 import { TodoRow } from '../interfaces/todo-row';
 import { TodoService } from '../services/todo.service';
@@ -17,13 +17,24 @@ import { CommonModule } from '@angular/common';
   templateUrl: './today-list.component.html',
   styleUrl: './today-list.component.css'
 })
-export class TodayListComponent{
+export class TodayListComponent implements OnInit{
 title:string = "Today's tasks";
-todayTodos: TodoRow[] = [];
-
+readonly time : TimeSpace = TimeSpace.Present;
+todayTodos: WritableSignal<TodoRow[]> = signal<TodoRow[]>([]);
+readonly todayTodosReadOnly: Signal<TodoRow[]> = this.todayTodos.asReadonly();
 
 constructor(private todoService: TodoService){}
 
+ngOnInit(): void {
+  this.getAllTodayTodoRowList();
+}
 
+getAllTodayTodoRowList(){
+this.todoService.getTodosByTimeSpace(this.time).subscribe((data)=>{
+  const todos: Todo[] = TodoMapper.mapTodoDtoListToTodoList(data);
+  this.todayTodos.set(TodoMapper.mapTodoListToTodoRowList(todos));
+  console.log("fetch")
+})
+}
 
 }
