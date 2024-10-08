@@ -17,15 +17,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './today-list.component.html',
   styleUrl: './today-list.component.css'
 })
-export class TodayListComponent implements OnInit {
+export class TodayListComponent{
 title:string = "Today's tasks";
 todayTodos: TodoRow[] = [];
 
 
 constructor(private todoService: TodoService){}
 
-ngOnInit(): void {
-  this.todoService.todayTodoRowList;
-}
+
 
 }

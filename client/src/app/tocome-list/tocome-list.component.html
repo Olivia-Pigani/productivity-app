@@ -1,5 +1,5 @@
-<ng-container *ngIf="tocomeTodos.length > 0; else messagePrinter">
-<app-todo-row *ngFor="let todoRow of tocomeTodos" [todoRow]="todoRow"></app-todo-row>
+<ng-container *ngIf="tocomeTodosReadOnly().length > 0; else messagePrinter">
+<app-todo-row *ngFor="let todoRow of tocomeTodosReadOnly()" [todoRow]="todoRow"></app-todo-row>
 </ng-container>
 
 <ng-template #messagePrinter>

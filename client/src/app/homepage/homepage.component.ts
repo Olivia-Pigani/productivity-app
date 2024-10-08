@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TocomeListComponent } from '../tocome-list/tocome-list.component';
 import { TodayListComponent } from '../today-list/today-list.component';
+import { TocomeListComponent } from '../tocome-list/tocome-list.component';
 
 
 @Component({

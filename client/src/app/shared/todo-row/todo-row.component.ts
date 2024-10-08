@@ -10,5 +10,4 @@ import { TodoRow } from '../../interfaces/todo-row';
 })
 export class TodoRowComponent {
  @Input() todoRow!:TodoRow;
-
 }
