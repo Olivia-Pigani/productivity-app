@@ -6,7 +6,7 @@ import { getFakeTodoList } from '../../../faker-object-maker';
 import { Todo } from '../models/todo';
 import { TodoRow } from '../interfaces/todo-row';
 import { TodoMapper } from '../mappers/todo-mapper';
-import { TodoService } from '../services/todo.service';
+import { TodoService } from '../services/todo/todo.service';
 import { of } from 'rxjs';
 import { tick } from '@angular/core/testing'
 

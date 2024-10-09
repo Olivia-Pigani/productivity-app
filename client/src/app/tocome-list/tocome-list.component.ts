@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoRowComponent } from '../shared/todo-row/todo-row.component';
-import { TodoService } from '../services/todo.service';
+import { TodoService } from '../services/todo/todo.service';
 import { TodoRow } from '../interfaces/todo-row';
 import { CommonModule } from '@angular/common'
 import { TodoMapper } from '../mappers/todo-mapper';

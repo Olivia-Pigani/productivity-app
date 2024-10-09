@@ -4,6 +4,7 @@ header {
     border-bottom: 1px solid black;
     padding: 2rem;
     align-items: baseline;
+    margin-bottom: 2.5rem;
   }
   
   #logo > span {

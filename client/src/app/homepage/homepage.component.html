@@ -1,12 +1,23 @@
 <div id="container">
     <div></div>
 <main>
+
+<div id="first-line">  
 <h1>{{h1Value}}</h1>
 
+<button id="add-todo" (click)="openModal(customTemplate)">
+    <span>+</span>
+</button>
+</div>  
 
 <router-outlet (activate)="listenToChildComponent($event)"></router-outlet>
 
 </main>
 <div></div>
-
 </div>
+
+<app-modal></app-modal>
+
+<ng-template #customTemplate>
+    <p>zdzqd</p>
+</ng-template>

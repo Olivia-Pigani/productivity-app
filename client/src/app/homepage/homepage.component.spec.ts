@@ -4,7 +4,7 @@ import { HomepageComponent } from './homepage.component';
 import { DebugElement } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { TodoService } from '../services/todo.service';
+import { TodoService } from '../services/todo/todo.service';
 
 
 describe('HomepageComponent', () => {

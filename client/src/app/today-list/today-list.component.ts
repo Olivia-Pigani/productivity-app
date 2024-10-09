@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, Signal, WritableSignal, signal } from '@angular/core';
 import { TodoRowComponent } from "../shared/todo-row/todo-row.component";
 import { TodoRow } from '../interfaces/todo-row';
-import { TodoService } from '../services/todo.service';
+import { TodoService } from '../services/todo/todo.service';
 import { OnInit } from '@angular/core';
 import { TimeSpace } from '../enums/time-space';
 import { TodoMapper } from '../mappers/todo-mapper';

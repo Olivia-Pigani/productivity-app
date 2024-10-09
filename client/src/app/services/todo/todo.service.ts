@@ -1,8 +1,8 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { TimeSpace } from '../enums/time-space';
-import { TodoDto } from '../dtos/todo-dto';
+import { TimeSpace } from '../../enums/time-space';
+import { TodoDto } from '../../dtos/todo-dto';
 
 @Injectable({
   providedIn: 'root'
