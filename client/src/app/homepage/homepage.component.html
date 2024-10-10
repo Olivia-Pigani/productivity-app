@@ -5,7 +5,7 @@
 <div id="first-line">  
 <h1>{{h1Value}}</h1>
 
-<button id="add-todo" (click)="openModal(customTemplate)">
+<button id="add-todo" (click)="openModal(customAddTodoTemplate)">
     <span>+</span>
 </button>
 </div>  
@@ -17,30 +17,31 @@
 </div>
 
 
-<ng-template #customTemplate>
+<ng-template #customAddTodoTemplate>
    <div class="modal">
 
-    <div>
-        <span>title</span>
-        <input type="text">
-    </div>
+    <div class="modal inputs-spans">
+        <div>
+            <span>title</span>
+            <span>to do for</span>
+            <span>priority</span>
 
-    <div>
-        <span>to do for</span>
-        <input type="date">
-    </div>
+        </div>
 
-    <div>
-        <span>priority</span>
-        <select>
-            <option>hight</option>
-            <option>medium</option>
-            <option>low</option>
-        </select>
+        <div>
+            <input type="text" placeholder="i have to ..." >
+            <input type="date">
+            <select>
+                <option>high</option>
+                <option>medium</option>
+                <option>low</option>
+            </select>
+        </div>        
     </div>
-
+    <div id="description">
     <textarea placeholder="description ..."></textarea>
-
-
+</div>
    </div>
+
+
 </ng-template>

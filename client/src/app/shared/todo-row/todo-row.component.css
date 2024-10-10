@@ -1,37 +1,47 @@
 .container{
     display: flex;
-    justify-content: center;
-    margin: 1.5rem 0rem;
-}
-
-li {
-list-style: none;
-border: 0.5px solid black;
-padding: 1rem 1rem;
-}
-
-ul{
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
 }
+input{
+    width: 1rem;
+    height: 1rem;
+    align-self: center;
+}
 
+li{
+    list-style: none;
+    justify-content: center;
+}
 article{
     display: flex;
-    gap: 4rem;
-    align-items: center;
-    
+    margin: 2rem 0;
+    border: 0.5px grey solid;
+    padding: 1rem 1rem;
+   
 }
-
+.container.content{
+    display: grid;
+    grid-template-columns: 15rem 2rem 5rem 2rem 20rem 2rem 10rem  ;
+    align-items: center;
+}
 #two-logo{
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
+    align-items: baseline;
 }
+.priority{
+    padding: 0.5rem 0.5rem;
+    width: 5rem;
+    text-align: center;
+    border-radius: 8px;
+    }
 
-
-#priority{
-padding: 0.5rem 0.5rem;
-background-color: chartreuse;
-border-radius: 8px;
+.red{
+    background-color: rgb(255, 126, 126);
 }
-
+.green{
+    background-color: aquamarine;
+}
+.yellow{
+    background-color: rgb(255, 214, 65);
+}

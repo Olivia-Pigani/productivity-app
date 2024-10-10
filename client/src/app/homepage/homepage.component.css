@@ -18,3 +18,30 @@ border-radius: 8px;
     color: white;
     font-size: x-large;
 }
+.modal.inputs-spans{
+    display: flex;
+    justify-content: space-between;
+    
+   
+}
+.modal.inputs-spans > div{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+#description{
+    display: flex;
+    justify-content: center;
+}
+textarea{
+    width: 40rem;
+    height: 10rem;
+    resize: none;
+    
+}
+span{
+    font-size: larger;
+    font-weight: bolder;
+}
+
