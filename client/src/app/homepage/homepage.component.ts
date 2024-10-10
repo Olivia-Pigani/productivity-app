@@ -4,6 +4,7 @@ import { TodayListComponent } from '../today-list/today-list.component';
 import { TocomeListComponent } from '../tocome-list/tocome-list.component';
 import { ModalComponent } from "../shared/modal/modal.component";
 import { FooterComponent } from "../shared/footer/footer.component";
+import { ModalService } from '../services/modal/modal.service';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class HomepageComponent{
   
   h1Value : string = '';
 
+  constructor(private modalService : ModalService){}
+
   listenToChildComponent(childComponent : TodayListComponent | TocomeListComponent){
     setTimeout(()=>{ // make it happen after first component cycle 
       this.h1Value = childComponent.title;
@@ -24,7 +27,12 @@ export class HomepageComponent{
   }
 
   openModal(customTemplate: TemplateRef<any>){
-    console.log("modal opened")
+    this.modalService
+    .open(customTemplate, {title: "Add a task"})
+    .subscribe(action => {
+      console.log("modal actionned",action);
+
+    })
   }
 
 }

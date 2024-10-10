@@ -2,8 +2,8 @@
 
 
 <div class="modal header">
-<h1>Form Title</h1>
-<button (click)="closeModal()">X</button>
+<h1>{{formTitle}}</h1>
+<button (click)="close()">X</button>
 </div>
 
 <div class="modal content">
@@ -13,12 +13,12 @@
 </div>
 
 <div class="modal footer">
-<button class="btn close">close</button>
-<button class="btn action">validate</button>
+<button class="btn close" (click)="close()">close</button>
+<button class="btn action" (click)="submit()">validate</button>
 </div>
 
 
 
 </div>
 
-<div class="modal backdrop"></div>
+<div class="modal backdrop" (click)="close()"></div>
