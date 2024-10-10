@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EmbeddedViewRef, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -9,7 +9,7 @@ import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/cor
 })
 export class ModalComponent {
 
-@Input() formTitle? = " ";
+@Input() formTitle? : string= " ";
 
 @Output() closeEvent = new EventEmitter<void>();
 @Output() submitEvent = new EventEmitter<void>();
@@ -21,7 +21,7 @@ close(): void{
   this.closeEvent.emit();
 }
 
-submit(){
+submit(): void{
 this.elementRef.nativeElement.remove();
 this.submitEvent.emit();
 }
