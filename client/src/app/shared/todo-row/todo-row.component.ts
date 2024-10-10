@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TodoRow } from '../../interfaces/todo-row';
 import { Priority } from '../../enums/priority';
+import { SlicePipe } from '@angular/common'
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-todo-row',
   standalone: true,
-  imports: [],
+  imports: [SlicePipe, FormsModule, NgIf],
   templateUrl: './todo-row.component.html',
   styleUrl: './todo-row.component.css'
 })

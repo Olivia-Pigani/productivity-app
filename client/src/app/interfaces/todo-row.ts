@@ -4,5 +4,6 @@ export interface TodoRow {
     title: string,
     description: string,
     deadLineDate : string,
-    priority : Priority
+    priority : Priority,
+    isDone: boolean
 }

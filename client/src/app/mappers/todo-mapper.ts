@@ -10,7 +10,8 @@ export class TodoMapper {
         title: todo.title.charAt(0).toUpperCase() + todo.title.slice(1), //"todo" => "Todo"
         description: todo.description,
         deadLineDate: todo.switchDateTypeToString(todo.deadLineDate),
-        priority: todo.priority
+        priority: todo.priority,
+        isDone: todo.isDone
       }
 
     }

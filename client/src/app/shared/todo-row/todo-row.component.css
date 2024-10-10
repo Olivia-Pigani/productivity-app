@@ -45,3 +45,10 @@ article{
 .yellow{
     background-color: rgb(255, 214, 65);
 }
+#done-line{
+    background-color: rgb(75, 75, 75);
+    height: 5px;
+    width: 65rem;
+    position: absolute;
+    margin-top: 1rem;
+}
