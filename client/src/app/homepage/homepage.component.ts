@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodayListComponent } from '../today-list/today-list.component';
 import { TocomeListComponent } from '../tocome-list/tocome-list.component';
@@ -18,7 +18,7 @@ export class HomepageComponent{
   
   h1Value : string = '';
 
-  constructor(private modalService : ModalService){}
+  constructor(private modalService : ModalService, private vcr: ViewContainerRef){}
 
   listenToChildComponent(childComponent : TodayListComponent | TocomeListComponent){
     setTimeout(()=>{ // make it happen after first component cycle 
@@ -28,7 +28,7 @@ export class HomepageComponent{
 
   openModal(customTemplate: TemplateRef<any>){
     this.modalService
-    .open(customTemplate, {title: "Add a task"})
+    .open(customTemplate, this.vcr ,{title: "Add a task"}) // vcr must be in component not in service to avoid circular dependancy
     .subscribe(action => {
       console.log("modal actionned",action);
 
