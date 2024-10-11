@@ -2,8 +2,6 @@ package com.productivityapp.demo.controller;
 
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
-import com.productivityapp.demo.domain.dto.TodoStatusDto;
-import com.productivityapp.demo.domain.entity.Todo;
 import com.productivityapp.demo.domain.enumeration.TimeSpace;
 import com.productivityapp.demo.service.TodoService;
 import org.springframework.http.HttpStatus;
