@@ -2,6 +2,8 @@ package com.productivityapp.demo.controller;
 
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
+import com.productivityapp.demo.domain.dto.TodoStatusDto;
+import com.productivityapp.demo.domain.entity.Todo;
 import com.productivityapp.demo.domain.enumeration.TimeSpace;
 import com.productivityapp.demo.service.TodoService;
 import org.springframework.http.HttpStatus;
@@ -9,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/todos")
 public class TodoController {
@@ -44,6 +46,20 @@ public class TodoController {
     @PutMapping("/{todoId}")
     public ResponseEntity<TodoResponseDto> updateTodoById(@PathVariable Long todoId, @RequestBody TodoDto todoToAdd) {
         return new ResponseEntity<>(todoService.updateTodo(todoId, todoToAdd), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{todoId}")
+    public ResponseEntity<TodoResponseDto> updateTodoStatusById(@PathVariable Long todoId, @RequestBody Boolean newStatus){
+    return new ResponseEntity<>(todoService.updateTodoStatusById(todoId, newStatus), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{todoId}")
+    public ResponseEntity<String> deleteTodoById(@PathVariable Long todoId){
+        if (todoService.deleteTodoById(todoId)){
+            return new ResponseEntity<String>("the todo is deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<String>("error : the todo was not found", HttpStatus.NOT_FOUND);
+        }
     }
 
 }

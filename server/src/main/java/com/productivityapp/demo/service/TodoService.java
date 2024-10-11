@@ -77,7 +77,7 @@ public class TodoService {
             todoRepository.delete(todo.get());
             return true;
         } else {
-            throw new EntityNotFoundException("there is no todo with this id");
+           return false;
         }
     }
 
@@ -102,5 +102,19 @@ public class TodoService {
         }
     }
 
+    public TodoResponseDto updateTodoStatusById(Long todoId, Boolean newStatus){
 
+        Optional<Todo> todoToUpdate = todoRepository.findById(todoId);
+
+        if (todoToUpdate.isPresent()){
+            Todo todo = todoToUpdate.get();
+            todo.setDone(newStatus);
+            todoRepository.save(todo);
+            return todoMapper.toTodoResponseDto(todo);
+        } else {
+
+        }
+        throw new EntityNotFoundException("there is no todo with this id");
+
+    }
 }

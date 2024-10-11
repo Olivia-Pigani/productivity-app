@@ -12,7 +12,7 @@ public class DateUtil {
 
     public static LocalDate dateParser(String dateStr) {
 
-        return LocalDate.parse(dateStr, dateTimeFormatter);
+            return LocalDate.parse(dateStr, dateTimeFormatter);
 
     }
 
