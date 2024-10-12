@@ -1,9 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoRow } from '../../interfaces/todo-row';
 import { Priority } from '../../enums/priority';
 import { SlicePipe } from '@angular/common'
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { TodoService } from '../../services/todo/todo.service';
+import { TodoDto } from '../../dtos/todo-dto';
+import { TodoMapper } from '../../mappers/todo-mapper';
+import {Signal } from '@angular/core';
 
 
 @Component({
@@ -15,8 +19,11 @@ import { NgIf } from '@angular/common';
 })
 export class TodoRowComponent implements OnInit {
  @Input() todoRow!:TodoRow;
+ @Output() onTodoChange = new EventEmitter<TodoRow>();
  priorityColour! : 'red' | 'green' | 'yellow';
  priority = Priority;
+
+ constructor(){}
 
  ngOnInit(): void {
    this.initPriorityColour();
@@ -41,5 +48,10 @@ export class TodoRowComponent implements OnInit {
       this.priorityColour = 'green'
     }
   }
+ }
+
+ onChangeTodoStatus(){
+  console.log("fropm children")
+  this.onTodoChange.emit(this.todoRow)
  }
 }

@@ -16,6 +16,10 @@ export class TodoService {
     return this.http.get<TodoDto[]>(`${this.baseUrl}/todos/timespace/${time}`);
   }
 
+  updateTodoStatus(todoId: number, newStatus: boolean): Observable<TodoDto>{
+    return this.http.patch<TodoDto>(`${this.baseUrl}/todos/${todoId}`, newStatus);
+  }
+
 }
 
 
