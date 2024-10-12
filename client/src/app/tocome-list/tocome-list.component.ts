@@ -53,7 +53,7 @@ export class TocomeListComponent  implements OnInit {
           id: 25,
           title: "",
           description: "",
-          deadLineDate: new Date,
+          deadLineDate: new Date().toLocaleString(),
           priority: Priority.High,
           isDone: false
         })
