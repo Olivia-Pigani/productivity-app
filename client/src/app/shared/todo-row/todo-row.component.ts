@@ -20,6 +20,7 @@ import {Signal } from '@angular/core';
 export class TodoRowComponent implements OnInit {
  @Input() todoRow!:TodoRow;
  @Output() onTodoChange = new EventEmitter<TodoRow>();
+ @Output() onDeleteTodo = new EventEmitter<number>();
  priorityColour! : 'red' | 'green' | 'yellow';
  priority = Priority;
 
@@ -51,7 +52,11 @@ export class TodoRowComponent implements OnInit {
  }
 
  onChangeTodoStatus(){
-  console.log("fropm children")
   this.onTodoChange.emit(this.todoRow)
+ }
+ 
+ onDeleteTodoWithId(){
+  console.log("delete emitting")
+  this.onDeleteTodo.emit(this.todoRow.id)
  }
 }

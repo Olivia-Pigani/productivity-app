@@ -20,6 +20,10 @@ export class TodoService {
     return this.http.patch<TodoDto>(`${this.baseUrl}/todos/${todoId}`, newStatus);
   }
 
+  deleteTodoById(todoId: number): Observable<TodoDto>{
+    return this.http.delete<TodoDto>(`${this.baseUrl}/todos/${todoId}`);
+  }
+
 }
 
 

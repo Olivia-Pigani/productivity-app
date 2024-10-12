@@ -53,6 +53,8 @@ public class TodoController {
 
     @DeleteMapping("/{todoId}")
     public ResponseEntity<String> deleteTodoById(@PathVariable Long todoId){
+        System.out.println("sdwqs");
+
         if (todoService.deleteTodoById(todoId)){
             return new ResponseEntity<String>("the todo is deleted", HttpStatus.OK);
         } else {

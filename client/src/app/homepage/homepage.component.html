@@ -5,7 +5,7 @@
 <div id="first-line">  
 <h1>{{h1Value}}</h1>
 
-<button id="add-todo" (click)="openModal(customAddTodoTemplate)">
+<button id="add-todo" (click)="openModalForPostingTodo(customAddTodoTemplate)">
     <span>+</span>
 </button>
 </div>  
@@ -18,30 +18,32 @@
 
 
 <ng-template #customAddTodoTemplate>
-   <div class="modal">
+   <form class="modal" [formGroup]="registerForm" >
 
-    <div class="modal inputs-spans">
-        <div>
-            <span>title</span>
-            <span>to do for</span>
-            <span>priority</span>
+        <div class="modal inputs-spans">
+            <div>
+                <label for="title">title</label>
+                <label for="deadLineDate">to do for</label>
+                <label for="priority">priority</label>
 
+            </div>
+
+            <div>
+                <input type="text" placeholder="i have to ..." id="title" formControlName="title">
+                <input type="date" id="deadLineDate" formControlName="deadLineDate">
+                <select id="priority" formControlName="priority">
+                    <option>high</option>
+                    <option>medium</option>
+                    <option>low</option>
+                </select>
+            </div>        
         </div>
 
-        <div>
-            <input type="text" placeholder="i have to ..." >
-            <input type="date">
-            <select>
-                <option>high</option>
-                <option>medium</option>
-                <option>low</option>
-            </select>
-        </div>        
-    </div>
-    <div id="description">
-    <textarea placeholder="description ..."></textarea>
-</div>
-   </div>
+        <div id="description">
+        <textarea placeholder="description ..." formControlName="description"></textarea>
+        </div>
 
+        <button type="submit">submit</button>
 
+    </form>
 </ng-template>

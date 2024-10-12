@@ -71,6 +71,8 @@ public class TodoService {
 
     public boolean deleteTodoById(Long todoId) {
 
+        System.out.println("szszs");
+
         Optional<Todo> todo = todoRepository.findById(todoId);
 
         if (todo.isPresent()) {
@@ -103,7 +105,6 @@ public class TodoService {
     }
 
     public TodoResponseDto updateTodoStatusById(Long todoId, Boolean newStatus){
-
         Optional<Todo> todoToUpdate = todoRepository.findById(todoId);
 
         if (todoToUpdate.isPresent()){

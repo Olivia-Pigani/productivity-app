@@ -1,4 +1,5 @@
 import { Component, ElementRef, EmbeddedViewRef, EventEmitter, Input, Output } from '@angular/core';
+import { TodoDto } from '../../dtos/todo-dto';
 
 @Component({
   selector: 'app-modal',

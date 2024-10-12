@@ -11,6 +11,7 @@ import { Observable, delay, map, startWith } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Priority } from '../enums/priority';
 import { runInInjectionContext, inject } from '@angular/core';
+import { TodoDto } from '../dtos/todo-dto';
 
 
 
@@ -72,5 +73,30 @@ export class TocomeListComponent  implements OnInit {
       isDone: dataSignal()!.isDone
     } : todo
   ));
+}
+
+deleteTodo(todoId: number):void{
+
+  let dataSignal : Signal<TodoRow>;
+
+  runInInjectionContext(this.injector, () => {
+
+    const dataObservable: Observable<TodoRow> = this.todoService.deleteTodoById(todoId)
+    .pipe(
+      map(todoDto => TodoMapper.mapTodoDtoToTodoRow(todoDto)),
+      startWith({
+        id: 25,
+        title: "",
+        description: "",
+        deadLineDate: new Date().toLocaleString(),
+        priority: Priority.High,
+        isDone: false
+      })
+    );
+    dataSignal = toSignal(dataObservable) as Signal<TodoRow>
+
+    this.tocomeTodos.update(todos=>todos.filter(todo=>todo.id !== todoId));
+
+  })
 }
 }
