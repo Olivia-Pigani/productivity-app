@@ -1,5 +1,6 @@
 package com.productivityapp.demo.service;
 
+import com.productivityapp.demo.domain.dto.PostTodoDto;
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
@@ -24,9 +25,9 @@ public class TodoService {
         this.todoMapper = todoMapper;
     }
 
-    public TodoResponseDto saveTodo(TodoDto todoDto) {
+    public TodoResponseDto saveTodo(PostTodoDto postTodoDto) {
 
-        Todo savedTodo = todoRepository.save(todoMapper.toTodo(todoDto));
+        Todo savedTodo = todoRepository.save(todoMapper.toTodo(postTodoDto));
         return todoMapper.toTodoResponseDto(savedTodo);
 
     }

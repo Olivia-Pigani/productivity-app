@@ -1,5 +1,6 @@
 package com.productivityapp.demo.controller;
 
+import com.productivityapp.demo.domain.dto.PostTodoDto;
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.enumeration.TimeSpace;
@@ -21,8 +22,8 @@ public class TodoController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<TodoResponseDto> saveTodo(@RequestBody TodoDto newTodoDto) {
-        return new ResponseEntity<>(todoService.saveTodo(newTodoDto), HttpStatus.CREATED);
+    public ResponseEntity<TodoResponseDto> saveTodo(@RequestBody PostTodoDto postTodoDto) {
+        return new ResponseEntity<>(todoService.saveTodo(postTodoDto), HttpStatus.CREATED);
     }
 
     @GetMapping("")

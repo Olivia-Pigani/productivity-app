@@ -27,3 +27,71 @@
     font-size: 1rem;
   }
 
+  .modal.opened{
+    display: block;
+  }
+
+  .modal.closed{
+    display: none;
+  }
+
+  .modal.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+  .modal.content.container{
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    background-color: rgb(255, 255, 255);
+    border: 1px #808080 solid;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;   
+    height: 38rem;
+}
+
+
+.modal.backdrop{
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 130.5vh;
+    
+}
+
+.btn{
+  border: none;
+  font-size: large;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 2rem 0rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  }
+  .btn.x{
+      padding: 1.5rem 1.5rem;
+      background-color: #808080;
+      color: white;
+  }
+  .btn.close, .btn.action{
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
+  }
+  .btn.close{
+      background-color: #808080;
+      color: white;
+  }
+  .btn.action{
+      background-color: blueviolet;
+      color: white;
+  }

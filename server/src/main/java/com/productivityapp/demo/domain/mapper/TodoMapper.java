@@ -1,10 +1,13 @@
 package com.productivityapp.demo.domain.mapper;
 
+import com.productivityapp.demo.domain.dto.PostTodoDto;
 import com.productivityapp.demo.domain.dto.TodoDto;
 import com.productivityapp.demo.domain.dto.TodoResponseDto;
 import com.productivityapp.demo.domain.entity.Todo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,18 @@ public class TodoMapper {
                 .isDone(todoDto.isDone())
                 .build();
 
+    }
+
+    public Todo toTodo(PostTodoDto postTodoDto) {
+
+        return Todo.builder()
+                .title(postTodoDto.title())
+                .description(postTodoDto.description())
+                .publishDate(LocalDate.now())
+                .deadLineDate(postTodoDto.deadLineDate())
+                .priority(postTodoDto.priority())
+                .isDone(false)
+                .build();
     }
 
     public TodoDto toTodoDto(Todo todo) {

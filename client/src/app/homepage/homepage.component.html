@@ -5,7 +5,7 @@
 <div id="first-line">  
 <h1>{{h1Value}}</h1>
 
-<button id="add-todo" (click)="openModalForPostingTodo(customAddTodoTemplate)">
+<button id="add-todo" (click)="openModalForPostingTodo()">
     <span>+</span>
 </button>
 </div>  
@@ -16,34 +16,52 @@
 <div></div>
 </div>
 
+<div [className]="modalDisplay">
+<div class="modal content container" >
 
-<ng-template #customAddTodoTemplate>
-   <form class="modal" [formGroup]="registerForm" >
+        <div class="modal header">
+            <h2>{{formTitle}}</h2>
+            <button class="btn x" (click)="closeModal()">X</button>
+        </div>
 
-        <div class="modal inputs-spans">
-            <div>
-                <label for="title">title</label>
-                <label for="deadLineDate">to do for</label>
-                <label for="priority">priority</label>
-
+        <ng-content *ngIf="errorMsg != null">  
+            <div id="error-message">
+            <span>{{errorMsg}}</span>
             </div>
+        </ng-content>
+      
 
-            <div>
-                <input type="text" placeholder="i have to ..." id="title" formControlName="title">
-                <input type="date" id="deadLineDate" formControlName="deadLineDate">
-                <select id="priority" formControlName="priority">
-                    <option>high</option>
-                    <option>medium</option>
-                    <option>low</option>
-                </select>
-            </div>        
-        </div>
+        <form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
 
-        <div id="description">
-        <textarea placeholder="description ..." formControlName="description"></textarea>
-        </div>
+                <div class="modal inputs-spans">
+                    <div>
+                        <label for="title">title*</label> 
+                        <label for="deadLineDate">to do for*</label>
+                        <label for="priority">priority*</label>
 
-        <button type="submit">submit</button>
+                    </div>
 
-    </form>
-</ng-template>
+                    <div>
+                        <input type="text" placeholder="i have to ..." id="title" formControlName="title" required>
+                        <input type="date" id="deadLineDate" formControlName="deadLineDate" required>
+                        <select id="priority" formControlName="priority" required>
+                            <option>high</option>
+                            <option>medium</option>
+                            <option>low</option>
+                        </select>
+                    </div>        
+                </div>
+
+                <div id="description">
+                <textarea placeholder="description ..." formControlName="description"></textarea>
+                </div>
+
+                <div class="btn">
+                <button class="btn close" type="button" (click)="closeModal()">close</button>
+                <button class="btn action" type="submit">submit</button>
+                </div>
+
+            </form>
+</div>
+<div class="modal backdrop" (click)="closeModal()"></div>
+</div>

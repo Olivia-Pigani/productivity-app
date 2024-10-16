@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { TimeSpace } from '../../enums/time-space';
 import { TodoDto } from '../../dtos/todo-dto';
+import { PostTodoDto } from '../../dtos/post-todo-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class TodoService {
 
   deleteTodoById(todoId: number): Observable<TodoDto>{
     return this.http.delete<TodoDto>(`${this.baseUrl}/todos/${todoId}`);
+  }
+
+  postTodo(newTodo: PostTodoDto): Observable<TodoDto>{
+    return this.http.post<TodoDto>(`${this.baseUrl}/todos/add`,newTodo);
   }
 
 }

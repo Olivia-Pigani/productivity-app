@@ -44,4 +44,8 @@ span{
     font-size: larger;
     font-weight: bolder;
 }
-
+#error-message{
+    font-weight: lighter;
+    font-size: smaller;
+    color: rgb(255, 44, 44);
+}

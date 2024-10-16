@@ -14,7 +14,7 @@ li{
 }
 article{
     display: flex;
-    margin: 2rem 0;
+    margin: 1rem 0;
     border: 0.5px grey solid;
     padding: 1rem 1rem;
    
@@ -48,7 +48,7 @@ article{
 #done-line{
     background-color: rgb(75, 75, 75);
     height: 5px;
-    width: 65rem;
+    width: 55rem;
     position: absolute;
-    margin-top: 1rem;
+    margin-top: 2.9rem;
 }
